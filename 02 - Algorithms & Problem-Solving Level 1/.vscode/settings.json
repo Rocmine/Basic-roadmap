@@ -1,0 +1,10 @@
+{
+    "files.associations": {
+        "iostream": "cpp",
+        "xstring": "cpp",
+        "xiosbase": "cpp"
+    },
+    "cSpell.words": [
+        "loanamount"
+    ]
+}
