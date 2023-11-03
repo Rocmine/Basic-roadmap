@@ -41,11 +41,11 @@ namespace input
         } while (number > 0);
         return number;
     }
-    string readString()
+    string readString(string text="enter a string ")
     {
 
         string Str;
-        cout<<"Enter a string : "; 
+        cout<<text; 
         getline(cin>>ws,Str);
         return Str;
     }
@@ -60,6 +60,12 @@ namespace input
         } while (str == Value);
 
         return str;
+    }
+    float readFloat(string text="enter a  float number  "){
+        float num=0; 
+       cout<<text;
+       cin>>num; 
+       return num; 
     }
 }
 
