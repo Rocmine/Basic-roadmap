@@ -16,7 +16,7 @@ int getRandomNumber(int min, int max)
     return rand() % max + min;
 }
 
-void FillMatrixWithRandomNumber(int matrix[3][3], int l, int c, int minRandValue, int maxRandValue)
+void printIntersectedValuesBetween2Matrices(int matrix[3][3], int l, int c, int minRandValue, int maxRandValue)
 {
 
     for (int i = 0; i < l; i++)
@@ -66,7 +66,7 @@ int main()
 
     int matrix1[3][3];
 
-    FillMatrixWithRandomNumber(matrix1, 3, 3, 0, 9);
+    printIntersectedValuesBetween2Matrices(matrix1, 3, 3, 0, 9);
     cout << "matrix 1:";
     printMatrix(matrix1, 3, 3);
 

@@ -1,7 +1,6 @@
 /*
-problem 9 :
-write a program to fill two 3*3  matrix with random numbers
-print it, then print the middle row and middle col .
+problem 15 :
+write a program to count  given number  in matrix
 */
 
 #include <iostream>
@@ -9,7 +8,6 @@ print it, then print the middle row and middle col .
 #include <ctime>
 #include <iomanip>
 using namespace std;
-
 int getRandomNumber(int min, int max)
 {
 
@@ -28,7 +26,6 @@ void printIntersectedValuesBetween2Matrices(int matrix[3][3], int l, int c, int 
         }
     }
 }
-
 void printMatrix(int matrix[3][3], int l, int c)
 {
 
@@ -45,25 +42,20 @@ void printMatrix(int matrix[3][3], int l, int c)
     cout << "\n";
 }
 
-void printMiddleRow(int matrix[3][3], int l, int c)
+int countFrequencyOfNumberInMatrix(int matrix[3][3], int l, int c, int countedNumber)
 {
 
+    int countOfNumber = 0;
     for (int i = 0; i < l; i++)
     {
-        printf("%02d  ", matrix[l / 2][i]);
+        for (int j = 0; j < c; j++)
+        {
+            if (matrix[i][j] == countedNumber)
+                countOfNumber++;
+        }
     }
 
-    cout << endl;
-}
-void printMiddleColumn(int matrix[3][3], int l, int c)
-{
-
-    for (int j = 0; j < c; j++)
-    {
-        printf("%02d  ", matrix[j][l / 2]);
-    }
-    
-    cout << endl;
+    return countOfNumber;
 }
 
 int main()
@@ -76,11 +68,9 @@ int main()
     cout << "matrix 1:";
     printMatrix(matrix1, 3, 3);
 
-    cout << "Middle Row of Matrix1 is:\n";
-    printMiddleRow(matrix1, 3, 3);
+    int countedNumber = input::readIntegerNumber("enter the number to count in matrix? ");
 
-    cout << "\nMiddle Col of Matrix1 is:\n";
-    printMiddleColumn(matrix1, 3, 3);
+    cout << "Number " << countedNumber << " count in matrix is " << countFrequencyOfNumberInMatrix(matrix1, 3, 3, countedNumber) << endl;
 
     return 0;
 }

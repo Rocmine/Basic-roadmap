@@ -1,11 +1,8 @@
 /*
-problem 14 :
-write a program to check  if the matrix is scalar or not
-------------
- x 0 0
- 0 x 0
- 0 0 x
------------
+problem 17 :
+write a program to check if a given a number exists in matrix or not
+
+
 */
 
 #include <iostream>
@@ -13,14 +10,13 @@ write a program to check  if the matrix is scalar or not
 #include <ctime>
 #include <iomanip>
 using namespace std;
-
 int getRandomNumber(int min, int max)
 {
 
     return rand() % max + min;
 }
 
-void printIntersectedValuesBetween2Matrices(int matrix[3][3], int l, int c, int minRandValue, int maxRandValue)
+void FillMatrixWithRandomNumber(int matrix[3][3], int l, int c, int minRandValue, int maxRandValue)
 {
 
     for (int i = 0; i < l; i++)
@@ -49,39 +45,36 @@ void printMatrix(int matrix[3][3], int l, int c)
     cout << "\n";
 }
 
-enum isScalar
+enum enIsExist
 {
     no,
     yes
 };
 
-isScalar checkIf2MatricesScalar(int matrix[3][3], int l, int c)
+enIsExist checkIfNumberIsExistInMatrix(int matrix[3][3], int l, int c, int searchedNumber)
 {
-
-    int previousDiagonalValue = matrix[0][0];
     for (int i = 0; i < l; i++)
     {
         for (int j = 0; j < c; j++)
         {
-
-            if ((i == j && matrix[i][j] != previousDiagonalValue) || (i != j && matrix[i][j] != 0))
-                return isScalar::no;
-                }
+            if (matrix[i][j] == searchedNumber)
+                return enIsExist::yes;
+        }
     }
 
-    return isScalar::yes;
+    return enIsExist::no;
 }
 
 int main()
 {
-    srand(time(NULL));
 
-    int matrix1[3][3] = {{9, 0, 0}, {0, 9, 0}, {0, 0, 9}};
-
-    // FillMatrixWithRandomNumber(matrix1, 3, 3, 0, 9);
+    int matrix1[3][3];
+    FillMatrixWithRandomNumber(matrix1, 3, 3, 0, 100);
     cout << "matrix 1:";
     printMatrix(matrix1, 3, 3);
 
-    cout << "matrices is " << (checkIf2MatricesScalar(matrix1, 3, 3) == isScalar::yes ? "" : "not") << " Scalar" << endl;
+    int searchedNumber = input::readIntegerNumber("enter the number to look for in matrix? ");
+    cout << (checkIfNumberIsExistInMatrix(matrix1, 3, 3, searchedNumber) == enIsExist::yes ? "Yes : It is there " : "No : It's  not there ") << endl;
+
     return 0;
 }

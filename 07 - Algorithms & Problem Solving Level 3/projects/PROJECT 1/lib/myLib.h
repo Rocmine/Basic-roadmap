@@ -4,21 +4,23 @@ using namespace std;
 namespace input
 {
 
-    int readIntegerNumber(string text="enter a  string")
+    int readIntegerNumber(string text="enter a  number")
     {
 
         int Number;
         cout <<text;
-        cin >> Number;
+        cin >> Number; cin.ignore(); 
+  if(cin.fail()) throw  new runtime_error("Invalid Type You Should Enter an Integer : ");
+        
         return Number;
     }
-    int readIntegerInRange(int min, int max)
+    int readIntegerInRange(int min, int max,string text="enter a  number")
     {
 
         int number = 0;
         do
         {
-            number = readIntegerNumber();
+            number = readIntegerNumber(text);
         } while (number < min || number > max);
         return number;
     }
@@ -72,7 +74,8 @@ namespace input
     float readFloat(string text="enter a  float number  "){
         float num=0; 
        cout<<text;
-       cin>>num; 
+       cin>>num;  cin.ignore(); 
+        if(cin.fail()) throw  new runtime_error("Invalid Type You Should Enter an Integer : ");
        return num; 
     }
 }
