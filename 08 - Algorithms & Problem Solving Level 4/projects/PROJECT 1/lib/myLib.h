@@ -10,7 +10,7 @@ namespace input
         int Number;
         cout <<text;
         cin >> Number; cin.ignore(); 
-  if(cin.fail()) throw   runtime_error("Invalid Type You Should Enter an Integer : ");
+  if(cin.fail()) throw  new runtime_error("Invalid Type You Should Enter an Integer : ");
         
         return Number;
     }
@@ -75,7 +75,7 @@ namespace input
         float num=0; 
        cout<<text;
        cin>>num;  cin.ignore(); 
-        if(cin.fail()) throw   runtime_error("Invalid Type You Should Enter an Integer : ");
+        if(cin.fail()) throw  new runtime_error("Invalid Type You Should Enter an Integer : ");
        return num; 
     }
 }

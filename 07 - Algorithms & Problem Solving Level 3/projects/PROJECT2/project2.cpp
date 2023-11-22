@@ -1,5 +1,30 @@
-/*
+#include <iostream>
+using namespace std;
 
-project 2 : bank extension I'll do with later : 
+int readInteger()
+{
+    int num = 0;
+    cout << "enter a number : ";
 
-*/
+    cin >> num;
+
+    if (cin.fail())
+        throw string("error invalid input : ");
+    cout << "hello ";
+    return num;
+}
+
+int main()
+{
+    try
+    {
+        readInteger();
+        cout << 'H';
+    }
+    catch (const string& e)
+    {
+        cerr << "Error " << e << endl;
+    }
+
+    return 0;
+}

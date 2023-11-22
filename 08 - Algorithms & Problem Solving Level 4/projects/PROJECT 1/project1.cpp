@@ -499,13 +499,18 @@ void StartBank()
     int userChoice = 0;
     do
     {
-        
+        try
+        {
             printMenu();
             userChoice = input::readIntegerInRange(enGameChoices::ShowClient, enGameChoices::Exit, "Choose what do you want to do [1 to 6]? ");
 
             ManageUserChoices(enGameChoices(userChoice), vClients);
-        
-    
+        }
+        catch (const std::exception &e)
+        {
+            std::cerr << "Caught exception: " << e.what() << std::endl;
+            Wait(); // Wait for user input before continuing
+        }
 
     } while (enGameChoices(userChoice) != enGameChoices::Exit);
 }
@@ -519,11 +524,8 @@ int main()
     catch (const std::exception &e)
     {
         // Catch the exception and handle it
-        system("cls"); 
-        std::cerr << "\nCaught exception: " << e.what() << std::endl;
-        cin.clear(); 
+        std::cerr << "Caught exception: " << e.what() << std::endl;
     }
-
 
     return 0;
 }
