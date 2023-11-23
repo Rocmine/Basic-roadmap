@@ -35,7 +35,8 @@ int arr[] = {1, 2, 3, 4, 5, 6, 6, 7};
 // bitwise and operator :  &  -------------[]
 // Number 1 and Number 2 = > return a result 
 
-// convert numbers 1 and 2  to binary  then  and do an and operator for each bit then convert 
+// convert numbers 1 and 2  to binary  then  and do an and operator 
+//for each bit then convert 
 //the result to decimal and return it : 
 
 //EXAMPLE : 
@@ -373,7 +374,8 @@ vName.back();
 // begin function : 
 vName.begin(); 
 /*
-begin(): The begin() function returns an iterator pointing to the first element in the container.
+begin(): The begin() function returns an iterator pointing 
+to the first element in the container.
 */
 
 // end function : 
