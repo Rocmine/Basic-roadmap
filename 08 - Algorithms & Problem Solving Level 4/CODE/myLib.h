@@ -4,31 +4,61 @@ using namespace std;
 namespace input
 {
 
-    int readIntegerNumber(string text="enter a  string")
+    long long int readIntegerNumber(string text="enter a  number")
     {
 
-        int Number;
+       long long  int Number;
         cout <<text;
-        cin >> Number;
+        cin >> Number; cin.ignore(); 
+  if(cin.fail()) throw   runtime_error("Invalid Type You Should Enter an Integer : ");
+        
         return Number;
     }
-    int readIntegerInRange(int min, int max)
+
+   float readFloat(string text="enter a  float number  "){
+        float num=0; 
+       cout<<text;
+       cin>>num;  cin.ignore(); 
+        if(cin.fail()) throw   runtime_error("Invalid Type You Should Enter an Integer : ");
+       return num; 
+    }
+    int readIntegerInRange(int min, int max,string text="enter a  number")
     {
 
         int number = 0;
         do
         {
-            number = readIntegerNumber();
+            number = readIntegerNumber(text);
         } while (number < min || number > max);
         return number;
     }
-    int readPositiveIntegerNumber()
+    float readFloatInRange(int min, int max,string text="enter a  number")
+    {
+
+        float number = 0;
+        do
+        {
+            number = readFloat(text);
+        } while (number < min || number > max);
+        return number;
+    }
+    int readPositiveIntegerNumber(string text="enter a positive number :")
     {
 
         int number = 0;
         do
         {
-            number = readIntegerNumber();
+            number = readIntegerNumber(text);
+        } while (number < 0);
+        return number;
+    }
+    float readPositiveFloatNumber(string text="enter a positive number :")
+    {
+
+        float number = 0;
+        do
+        {
+            number = readFloat(text);
         } while (number < 0);
         return number;
     }
@@ -69,12 +99,7 @@ namespace input
 
         return str;
     }
-    float readFloat(string text="enter a  float number  "){
-        float num=0; 
-       cout<<text;
-       cin>>num; 
-       return num; 
-    }
+   
 }
 
 namespace output
