@@ -186,7 +186,7 @@ enum enWannaAddMore
 enWannaAddMore checkIfUserWannaAddMoreRecord()
 {
     char wannaAddMore;
-    cout << "\nClient Successfully, do you want to add more clients";
+    cout << "\nClient added Successfully, do you want to add more clients";
 
     wannaAddMore = input::readCharacter("[y][n] : ");
 
