@@ -224,7 +224,7 @@ void printClientsBasicTableOnScreen(vector<stClient> vClients)
 
     cout << setw(75) << "\n\n                                          Client List (" << vClients.size() << ") Client(s).\n";
     cout << setw(75) << "_______________________________________________________________________________________________________________________\n\n";
-    cout << "  | " << left << setw(20) << "Account Name"
+    cout << "  | " << left << setw(20) << "Account Number"
          << "   "
          << "  | " << left << setw(20) << "Pin Code"
          << "   "
@@ -478,10 +478,15 @@ void DepositRecordFromVector(vector<stClient> &vClients, string ClientAn)
        
             DepositRecordFromVector(vClients, ClientAn);
             UpdateFile(vClients);
-            cout << "amount  deposed   Successfully \n";
+            cout << "amount  deposed   Successfully \n\n";
     
 
  }
+  else
+    {
+        cout << "\nclient with Account Number(" << ClientAn << ") "
+             << "not found!\n\n";
+    }
  }
  // ------------------ eWithdraw  functions -----------------------------------------------
  void WithdrawRecordFromVector(vector<stClient> &vClients, string ClientAn)
@@ -510,16 +515,21 @@ void DepositRecordFromVector(vector<stClient> &vClients, string ClientAn)
        
             WithdrawRecordFromVector(vClients, ClientAn);
             UpdateFile(vClients);
-            cout << "amount  Withdraw  Successfully \n";
+            cout << "amount  Withdraw  Successfully \n\n";
     
 
  }
+ else
+    {
+        cout << "\nclient with Account Number(" << ClientAn << ") "
+             << "not found!\n\n";
+    }
   }
 // ------------------ balance   functions -----------------------------------------------
   void printBasicBalanceTableOnScreen(vector<stClient> vClients)
 {
 
-    cout << setw(75) << "\n\n                                          Client List (" << vClients.size() << ") Client(s).\n";
+    cout << setw(75) << "\n\n                                          Client List (" << vClients.size()<< ") Client(s).\n";
     cout << setw(75) << "_______________________________________________________________________________________________________________________\n\n";
     cout << "  | " << left << setw(20) << "Account Name"
          << "   "
@@ -555,7 +565,7 @@ void printBalanceClientInfo(stClient client)
     cout << setw(75) << "\n_______________________________________________________________________________________________________________________\n\n";
  }
 
-void Wait(); 
+void Wait( string msg);
 enum enWannaReturnToMenu{
     noBackMenu, 
     wannaBackMenu 
@@ -578,11 +588,11 @@ enWannaReturnToMenu ManageUserTransactionChoices(enGameTransactionChoices GameCh
     case enGameTransactionChoices::mainMenu :
              wannaReturnToMenu=enWannaReturnToMenu::wannaBackMenu;
         break;
-
+      
   
     }
-       
-    Wait();
+    if( wannaReturnToMenu==enWannaReturnToMenu::noBackMenu)
+       Wait("go back to Transaction menu :");
     return wannaReturnToMenu;
 }
 
@@ -602,9 +612,8 @@ void transactionF(vector<stClient> &vClients){
             userChoice=enGameTransactionChoices::mainMenu;
         
     
-
+         
     } while(enGameTransactionChoices(userChoice) != enGameTransactionChoices::mainMenu);
-
 
 }
 // --------------------------------------------------exit Functions------------------------------------------
@@ -646,13 +655,12 @@ void printMenu()
          << "[7] Exit.\n";
     cout << setw(70) << "======================================================================\n";
 }
-void Wait()
+void Wait( string msg)
 {
 
-    string temp;
-    cout << "Press Enter to go back  to  Main Menu...";
-    getchar(); 
-    cin.ignore();
+    cout <<msg;
+    system("pause>0");
+
 }
 enum enGameChoices
 {
@@ -698,7 +706,7 @@ void ManageUserChoices(enGameChoices GameChoice, vector<stClient> &vClients)
         break;
     }
 
-    Wait();
+    Wait("\nPress Enter to go back  to  main Menu :");
 }
 
 void StartBank()
@@ -710,7 +718,7 @@ void StartBank()
     {
         
             printMenu();
-            userChoice = input::readIntegerInRange(enGameChoices::ShowClient, enGameChoices::Exit, "Choose what do you want to do [1 to 6]? ");
+            userChoice = input::readIntegerInRange(enGameChoices::ShowClient, enGameChoices::Exit, "Choose what do you want to do [1 to 7]? ");
 
             ManageUserChoices(enGameChoices(userChoice), vClients);
         
