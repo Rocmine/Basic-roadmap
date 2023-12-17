@@ -45,7 +45,7 @@ int main()
 
     try
     {
-        short day = input::readIntegerInRange(1, 30, "enter  a day   :  ");
+        short day = input::readIntegerInRange(1, 31, "enter  a day   :  ");
         short month = input::readIntegerInRange(1, 12, "enter  a Month   :  ");
         int year = input::readIntegerNumber("\nenter a Year      :  ");
         cout << "Number of Days from the beginning of the year is : " << getNbrDaysFromDate(day, month, year) << endl;

@@ -106,7 +106,7 @@ stDate readDate()
 {
     stDate date;
 
-    date.day = input::readIntegerInRange(1, 30, "enter  a day   :  ");
+    date.day = input::readIntegerInRange(1, 31, "enter  a day   :  ");
     date.month = input::readIntegerInRange(1, 12, "enter  a Month   :  ");
     date.year = input::readIntegerNumber("enter a Year      :  ");
 
