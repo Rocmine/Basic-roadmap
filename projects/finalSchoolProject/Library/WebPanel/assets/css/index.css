@@ -1,0 +1,50 @@
+@import url("main.css");
+
+main .table-container {
+    display: flex;
+    width: 100%;
+    justify-content: center;
+    overflow: hidden;
+  }
+  
+  table {
+    font-family: var(--second-font);
+    background-color: var(--highlight-color);
+    text-align: center;
+  }
+  
+  table,
+  th,
+  td {
+    border: 0px solid;
+    border-collapse: collapse;
+  }
+  
+  th,
+  td {
+    padding: 15px 20px 15px 20px;
+  }
+  
+  th {
+    background-color: var(--bg-dark-color);
+    color: var(--main-color);
+  }
+  
+  main .table-container table tbody tr td {
+    text-align: center;
+  }
+  
+  main a {
+    padding: 5px 20px 5px 20px;
+    border: 0;
+    background-color: var(--second-color);
+    color: var(--main-color);
+    border-radius: 20px;
+    transition: 0.3s cubic-bezier(0.165, 0.84, 0.44, 1);
+    text-decoration: none;
+  }
+  
+  main a:hover {
+    background-color: var(--bg-dark-color);
+    color: var(--highlight-color);
+  }

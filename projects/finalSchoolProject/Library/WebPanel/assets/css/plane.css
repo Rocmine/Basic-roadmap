@@ -1,0 +1,57 @@
+@import url("main.css");
+
+main .plane-card {
+  display: grid;
+  margin: 5%;
+  padding: 50px;
+  background-color: var(--bg-dark-color);
+  color: var(--main-color);
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  grid-template-rows: repeat(3, 1fr);
+  grid-column-gap: 0px;
+  grid-row-gap: 0px;
+  font-family: var(--second-font);
+}
+
+.plane-card div {
+  display: flex;
+  height: fit-content;
+  flex-direction: column;
+  font-size:2em;
+  justify-content: center;
+}
+
+span {
+    color: var(--second-color);
+    font-weight: bolder;
+}
+
+.plane-icon {
+  grid-area: 1 / 1 / 2 / 2;
+}
+.plane-code {
+  grid-area: 2 / 1 / 3 / 2;
+}
+.id-vol {
+  grid-area: 3 / 1 / 4 / 2;
+}
+.plane-pilot {
+  grid-area: 1 / 2 / 2 / 3;
+}
+.plane-model {
+  grid-area: 2 / 2 / 3 / 3;
+}
+.plane-capacity {
+  grid-area: 3 / 2 / 4 / 3;
+}
+.plane-fab-date {
+  grid-area: 1 / 3 / 2 / 4;
+}
+.plane-numvols {
+  grid-area: 2 / 3 / 3 / 4;
+}
+
+main .plane-card i {
+  font-size: 5vmax;
+}

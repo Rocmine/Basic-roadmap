@@ -1,0 +1,110 @@
+@import url("https://fonts.cdnfonts.com/css/built-titling");
+@import url("https://fonts.cdnfonts.com/css/futura-std-4");
+@import url("https://cdn.jsdelivr.net/npm/normalize.css");
+
+:root {
+  --main-color: #fff;
+  --second-color: #da4b3b;
+  --highlight-color: #f2aa58;
+  --background-color: #192235;
+  --bg-dark-color: #001428;
+  --main-font: "Built Titling", sans-serif;
+  --second-font: "Futura Std", sans-serif;
+}
+
+body {
+  background-color: var(--background-color);
+}
+
+img {
+  image-rendering: auto;
+}
+
+#loader {
+  position: absolute;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  width: 100vw;
+  height: 100vh;
+  z-index: 999;
+  background-color: var(--bg-dark-color);
+  gap: 50px;
+  transition: 1s cubic-bezier(0.165, 0.84, 0.44, 1);
+  filter: opacity(1);
+}
+
+#loader i {
+  color: white;
+  font-size: 5em;
+  animation: spin 2s alternate infinite ease-in-out;
+}
+
+#loader h1 {
+  color: var(--main-color);
+  font-family: var(--second-font);
+  font-weight: 400;
+  font-size: medium;
+  text-align: center;
+  line-height: 40px;
+}
+
+#loader span {
+  color: var(--highlight-color);
+  font-weight: 600;
+}
+
+@keyframes spin {
+  0% {
+    transform: translateY(-20px);
+  }
+  100% {
+    transform: translateY(20px);
+  }
+}
+
+header {
+  display: flex;
+  width: 100%;
+  height: 90px;
+  background-color: var(--bg-dark-color);
+  align-items: center;
+  overflow: hidden;
+  user-select: none;
+}
+
+header img {
+  width: 10%;
+  min-width: 200px;
+  transition: all 0.3s cubic-bezier(0.165, 0.84, 0.44, 1);
+}
+
+header:hover img {
+  transform: scale(1.1);
+}
+
+header .title {
+  overflow: hidden;
+  position: absolute;
+  display: flex;
+  width: 100%;
+  height: 90px;
+  flex-direction: row;
+  flex-wrap: nowrap;
+  justify-content: center;
+  align-items: center;
+  font-size: 1vmax;
+}
+
+header .title h1 {
+  position: absolute;
+  color: var(--main-color);
+  font-family: var(--main-font);
+}
+
+main .title {
+  color: var(--highlight-color);
+  font-family: var(--main-font);
+  text-align: center;
+}

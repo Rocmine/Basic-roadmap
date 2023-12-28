@@ -1,0 +1,167 @@
+{
+    "flights": [
+        {
+            "avion": {
+                "capacite": 300,
+                "codeAv": 1,
+                "dateFab": {
+                    "days": 10,
+                    "month": 12,
+                    "year": 2014
+                },
+                "modele": "Boieng 505",
+                "nbrVols": 32,
+                "pilote": "Youbista"
+            },
+            "dateAr": {
+                "days": 28,
+                "month": 12,
+                "year": 2023
+            },
+            "dateDep": {
+                "days": 27,
+                "month": 12,
+                "year": 2023
+            },
+            "vPassager": [
+                {
+                    "adresse": "rabat",
+                    "age": 20,
+                    "idPass": 1,
+                    "nom": "ayman",
+                    "prenom": "el hilali",
+                    "tele": "0606060606"
+                },
+                {
+                    "adresse": "temara",
+                    "age": 20,
+                    "idPass": 2,
+                    "nom": "mohamed amine",
+                    "prenom": "rochdi",
+                    "tele": "0707070707"
+                },
+                {
+                    "adresse": "fes",
+                    "age": 18,
+                    "idPass": 3,
+                    "nom": "asmae",
+                    "prenom": "chniwla",
+                    "tele": "0000000000"
+                }
+            ],
+            "volId": 1
+        },
+        {
+            "avion": {
+                "capacite": 400,
+                "codeAv": 2,
+                "dateFab": {
+                    "days": 7,
+                    "month": 12,
+                    "year": 2016
+                },
+                "modele": "yamaha",
+                "nbrVols": 754,
+                "pilote": "amine"
+            },
+            "dateAr": {
+                "days": 31,
+                "month": 12,
+                "year": 2023
+            },
+            "dateDep": {
+                "days": 30,
+                "month": 12,
+                "year": 2023
+            },
+            "vPassager": [
+                {
+                    "adresse": "earth",
+                    "age": 25,
+                    "idPass": 32,
+                    "nom": "hamid",
+                    "prenom": "test",
+                    "tele": "0601020304"
+                },
+                {
+                    "adresse": "maroc",
+                    "age": 20,
+                    "idPass": 432,
+                    "nom": "aya",
+                    "prenom": "rahmani",
+                    "tele": "0909090909"
+                }
+            ],
+            "volId": 2
+        },
+        {
+            "avion": {
+                "capacite": 45032,
+                "codeAv": 543,
+                "dateFab": {
+                    "days": 4,
+                    "month": 10,
+                    "year": 1950
+                },
+                "modele": "hehe",
+                "nbrVols": 45839,
+                "pilote": "haha"
+            },
+            "dateAr": {
+                "days": 2,
+                "month": 1,
+                "year": 2024
+            },
+            "dateDep": {
+                "days": 1,
+                "month": 1,
+                "year": 2024
+            },
+            "vPassager": [
+                {
+                    "adresse": "world",
+                    "age": 100,
+                    "idPass": 69,
+                    "nom": "test",
+                    "prenom": "test",
+                    "tele": "0102030303"
+                },
+                {
+                    "adresse": "bro",
+                    "age": 45,
+                    "idPass": 70,
+                    "nom": "test",
+                    "prenom": "test",
+                    "tele": "498530845"
+                }
+            ],
+            "volId": 4
+        },
+        {
+            "avion": {
+                "capacite": 758,
+                "codeAv": 54,
+                "dateFab": {
+                    "days": 3,
+                    "month": 4,
+                    "year": 2012
+                },
+                "modele": "avionmar",
+                "nbrVols": 34877,
+                "pilote": "tester"
+            },
+            "dateAr": {
+                "days": 2,
+                "month": 1,
+                "year": 2024
+            },
+            "dateDep": {
+                "days": 1,
+                "month": 1,
+                "year": 2024
+            },
+            "vPassager": null,
+            "volId": 9
+        }
+    ]
+}
