@@ -1,11 +1,11 @@
 /*
-problem 16:
-Write a program to read date and  make a function
-to increase date by one day.
-
+problem 61 :
+Write a program to read Date and write a
+function to validate this date
 */
 #include <iostream>
 #include <string>
+#include <cmath>
 #include "myLib.h"
 #include <iomanip>
 using namespace std;
@@ -33,18 +33,6 @@ struct stDate
     short month;
     short day;
 };
-
-bool checkIfLastDaysInMonth(stDate date)
-{
-    return date.day == getMonthDaysInYear(date.year, date.month);
-}
-
-bool checkIfLastMonthInYear(short month)
-{
-
-    return month == 12;
-}
-
 bool checkIfValidDay(stDate date)
 {
 
@@ -67,38 +55,15 @@ string convertDateToString(stDate date)
 
     return to_string(date.day) + "/" + to_string(date.month) + "/" + to_string(date.year);
 }
+int  main(){
+ 
+   cout<<"enter  the date info : \n"; 
 
-void increaseDateByOneDay(stDate &date)
-{
+//    validate date in reading : 
+   stDate date=readDate(); 
 
-    if (checkIfLastDaysInMonth(date))
-    {
+    cout<<convertDateToString(date)<<endl; 
 
-        if (checkIfLastMonthInYear(date.month))
-        {
-            date.year++;
-            date.day = 1;
-            date.month = 1;
-        }
-        else
-        {
-            date.month++;
-            date.day = 1;
-        }
-    }
-    else
-    {
-        date.day++;
-    }
-}
-int main()
-{
-    stDate date = readDate();
-    cout << endl;
 
-    increaseDateByOneDay(date);
-
-    cout << convertDateToString(date) << endl;
-    //  test update
-    return 0;
+    return 0; 
 }

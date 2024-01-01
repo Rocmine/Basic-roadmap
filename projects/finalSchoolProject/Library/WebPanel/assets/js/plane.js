@@ -1,4 +1,4 @@
-const jsonFileUrl = "/data.json";
+const jsonFileUrl = new URL('data.json', window.location.href).href;
 fetch(jsonFileUrl)
   .then((response) => {
     if (!response.ok) {

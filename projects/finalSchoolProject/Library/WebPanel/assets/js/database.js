@@ -1,4 +1,5 @@
-const jsonFileUrl = "/data.json";
+var jsonFileUrl = new URL('data.json', window.location.href).href;
+
 
 fetch(jsonFileUrl)
   .then((response) => {
@@ -8,6 +9,7 @@ fetch(jsonFileUrl)
     return response.json();
   })
   .then((data) => {
+
     const tableBody = document.querySelector("table");
 
     if (data.flights) {

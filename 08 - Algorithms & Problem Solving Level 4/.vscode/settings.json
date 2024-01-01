@@ -1,11 +1,14 @@
 {
     "files.associations": {
+        "*.sql": "oraclesql",
         "xstring": "cpp",
         "iostream": "cpp",
         "vector": "cpp",
         "ostream": "cpp",
         "string": "cpp",
         "iomanip": "cpp",
-        "iosfwd": "cpp"
+        "iosfwd": "cpp",
+        "limits": "cpp",
+        "xiosbase": "cpp"
     }
 }

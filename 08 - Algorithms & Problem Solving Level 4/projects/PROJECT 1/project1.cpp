@@ -1,12 +1,26 @@
 /*
-project 1 :  bank1 :
+project 2 :  bank 1  extension  3 :
+[1] Show Client List.
+[2] Add New Client.
+[3] Delete Client.
+[4] Update Client Info.
+[5] Find Client.
+[6] Transactions.
+[7] Manage Users.
+[8] Logout
 
-[1] : show client list
-[2] : add new client
-[3] : Delete new Client
-[4] : update client info
-[5] :find client
-[6] : exit
+[7]Manage Users : 
+    [1] List Users.    UserName | Password | permissions  
+    [2] Add New User.
+    [3] Delete User.
+    [4] Update User.
+    [5] Find User.
+    [6] Main Menu.
+ 
+ permissions : [1] to [7]
+
+
+ To Do Later inchalah :  
 */
 
 #include <iostream>
@@ -186,7 +200,7 @@ enum enWannaAddMore
 enWannaAddMore checkIfUserWannaAddMoreRecord()
 {
     char wannaAddMore;
-    cout << "\nClient Successfully, do you want to add more clients";
+    cout << "\nClient added Successfully, do you want to add more clients";
 
     wannaAddMore = input::readCharacter("[y][n] : ");
 
@@ -218,7 +232,7 @@ void printClientsBasicTableOnScreen(vector<stClient> vClients)
 
     cout << setw(75) << "\n\n                                          Client List (" << vClients.size() << ") Client(s).\n";
     cout << setw(75) << "_______________________________________________________________________________________________________________________\n\n";
-    cout << "  | " << left << setw(20) << "Account Name"
+    cout << "  | " << left << setw(20) << "Account Number"
          << "   "
          << "  | " << left << setw(20) << "Pin Code"
          << "   "
@@ -406,6 +420,210 @@ void findClient(vector<stClient> vClients)
     }
 }
 
+
+// ---------------------Transaction functions --------------------------------------------
+/*
+[1] Deposit.
+[2] Withdraw.
+[3] Total Balances
+[4] Main Menu.
+*/
+
+// ------------------Deposit  functions -----------------------------------------------
+void printTransactionMenu()
+{
+
+    system("cls");
+    cout << setw(70) << "\n======================================================================\n";
+
+    cout << "                          Transaction Menu Screen                          \n";
+    cout << setw(70) << "======================================================================\n";
+
+    cout << "                "
+         << "[1] Deposit.\n";
+    cout << "                "
+         << "[2] Withdraw.\n";
+    cout << "                "
+         << "[3] Total Balances.\n";
+    cout << "                "
+         << "[4] Main Menu.\n";
+   
+    cout << setw(70) << "======================================================================\n";
+}
+
+enum enGameTransactionChoices
+{
+    eDeposit = 1,
+     eWithdraw,
+     TotalBalances,
+      mainMenu
+};
+void DepositRecordFromVector(vector<stClient> &vClients, string ClientAn)
+{
+
+    for (int i = 0; i < vClients.size(); i++)
+    {
+        if (vClients[i].accountNumber == ClientAn)
+        {  
+        
+            vClients[i].accountBalance += input::readFloat("Enter Deposit amount? ");
+            return;
+        }
+    }
+}
+
+
+ void  Deposit(vector<stClient> &vClients){
+   system("cls");
+    printSectionTitle("Deposit Screen");
+    stClient client;
+
+    string ClientAn = input::readString("Enter AccountNumber? ");
+    if (checkIfClientAlreadyExist(vClients, ClientAn, client) == enIsClientFound::isFound)
+    {
+
+        printRecord(client);
+       
+            DepositRecordFromVector(vClients, ClientAn);
+            UpdateFile(vClients);
+            cout << "amount  deposed   Successfully \n\n";
+    
+
+ }
+  else
+    {
+        cout << "\nclient with Account Number(" << ClientAn << ") "
+             << "not found!\n\n";
+    }
+ }
+ // ------------------ eWithdraw  functions -----------------------------------------------
+ void WithdrawRecordFromVector(vector<stClient> &vClients, string ClientAn)
+{
+
+    for (int i = 0; i < vClients.size(); i++)
+    {
+        if (vClients[i].accountNumber == ClientAn)
+        {  
+        
+            vClients[i].accountBalance -= input::readFloat("Enter Withdraw amount?");
+            return;
+        }
+    }
+}
+  void Withdraw(vector<stClient> &vClients){
+ system("cls");
+    printSectionTitle("Withdraw Screen");
+    stClient client;
+
+    string ClientAn = input::readString("Enter AccountNumber? ");
+    if (checkIfClientAlreadyExist(vClients, ClientAn, client) == enIsClientFound::isFound)
+    {
+
+        printRecord(client);
+       
+            WithdrawRecordFromVector(vClients, ClientAn);
+            UpdateFile(vClients);
+            cout << "amount  Withdraw  Successfully \n\n";
+    
+
+ }
+ else
+    {
+        cout << "\nclient with Account Number(" << ClientAn << ") "
+             << "not found!\n\n";
+    }
+  }
+// ------------------ balance   functions -----------------------------------------------
+  void printBasicBalanceTableOnScreen(vector<stClient> vClients)
+{
+
+    cout << setw(75) << "\n\n                                          Client List (" << vClients.size()<< ") Client(s).\n";
+    cout << setw(75) << "_______________________________________________________________________________________________________________________\n\n";
+    cout << "  | " << left << setw(20) << "Account Name"
+         << "   "
+         << "  | " << left << setw(20) << "Pin Code"
+         << "   "
+         << "  | " << left << setw(20) << " client Name"
+         << "   "
+         << "  | " << fixed << setprecision(2) << "   Balance"
+         << "\n";
+    cout << setw(75) << "_______________________________________________________________________________________________________________________\n\n";
+}
+void printBalanceClientInfo(stClient client)
+{
+
+    cout << "  | " << left << setw(20) << client.accountNumber << "   "
+                                                                  "  | "
+         << left << setw(20) << client.pinCode << "   "
+         << left << setw(3) << "  | " << setw(20) << client.name << "   "
+         << "  | " 
+         << fixed << setprecision(2) << "   " << client.accountBalance
+         << "\n";
+}
+
+
+  void PrintBalanceTable(vector<stClient> vClients){
+    system("cls");
+    printBasicBalanceTableOnScreen(vClients);
+    for (stClient &client : vClients)
+    {
+        printBalanceClientInfo(client);
+    }
+
+    cout << setw(75) << "\n_______________________________________________________________________________________________________________________\n\n";
+ }
+
+void Wait( string msg);
+enum enWannaReturnToMenu{
+    noBackMenu, 
+    wannaBackMenu 
+};
+
+enWannaReturnToMenu ManageUserTransactionChoices(enGameTransactionChoices GameChoice, vector<stClient> &vClients)
+{
+     enWannaReturnToMenu wannaReturnToMenu=enWannaReturnToMenu::noBackMenu; 
+    switch (GameChoice)
+    {
+    case enGameTransactionChoices::eDeposit :
+            Deposit(vClients); 
+        break;
+    case enGameTransactionChoices::eWithdraw :
+            Withdraw(vClients); 
+        break;
+    case enGameTransactionChoices::TotalBalances :
+             PrintBalanceTable(vClients);
+        break;
+    case enGameTransactionChoices::mainMenu :
+             wannaReturnToMenu=enWannaReturnToMenu::wannaBackMenu;
+        break;
+      
+  
+    }
+    if( wannaReturnToMenu==enWannaReturnToMenu::noBackMenu)
+       Wait("go back to Transaction menu :");
+    return wannaReturnToMenu;
+}
+
+void transactionF(vector<stClient> &vClients){
+     system("cls");
+    printSectionTitle("Transactions Menu Screen");
+    printTransactionMenu();
+
+    int userChoice = 0;
+    do
+    {
+        
+           printTransactionMenu();
+            userChoice = input::readIntegerInRange(enGameTransactionChoices::eDeposit, enGameTransactionChoices::mainMenu, "Choose what do you want to do [1 to 4]? ");
+
+            if(ManageUserTransactionChoices(enGameTransactionChoices(userChoice), vClients) == enWannaReturnToMenu::wannaBackMenu)
+            userChoice=enGameTransactionChoices::mainMenu;
+        
+    
+         
+    } while(enGameTransactionChoices(userChoice) != enGameTransactionChoices::mainMenu);
+
+}
 // --------------------------------------------------exit Functions------------------------------------------
 
 void exitProgram()
@@ -439,16 +657,18 @@ void printMenu()
     cout << "                "
          << "[5] Find Client.\n";
     cout << "                "
-         << "[6] Exit.\n";
+         << "[6] Transactions.\n";
+
+    cout << "                "
+         << "[7] Exit.\n";
     cout << setw(70) << "======================================================================\n";
 }
-void Wait()
+void Wait( string msg)
 {
 
-    string temp;
-    cout << "Press Enter to go back  to  Main Menu...";
-    getchar(); 
-    cin.ignore();
+    cout <<msg;
+    system("pause>0");
+
 }
 enum enGameChoices
 {
@@ -457,6 +677,7 @@ enum enGameChoices
     DeleteClient,
     UpdateClient,
     FindClient,
+    transaction,
     Exit
 };
 
@@ -484,12 +705,16 @@ void ManageUserChoices(enGameChoices GameChoice, vector<stClient> &vClients)
         findClient(vClients); // [5]
         break;
 
+    case enGameChoices::transaction:
+        transactionF(vClients); // [6]
+        break;
+
     case enGameChoices::Exit:
-        exitProgram(); // [6]
+        exitProgram(); // [7]
         break;
     }
 
-    Wait();
+    Wait("\nPress Enter to go back  to  main Menu :");
 }
 
 void StartBank()
@@ -499,18 +724,13 @@ void StartBank()
     int userChoice = 0;
     do
     {
-        try
-        {
+        
             printMenu();
-            userChoice = input::readIntegerInRange(enGameChoices::ShowClient, enGameChoices::Exit, "Choose what do you want to do [1 to 6]? ");
+            userChoice = input::readIntegerInRange(enGameChoices::ShowClient, enGameChoices::Exit, "Choose what do you want to do [1 to 7]? ");
 
             ManageUserChoices(enGameChoices(userChoice), vClients);
-        }
-        catch (const std::exception &e)
-        {
-            std::cerr << "Caught exception: " << e.what() << std::endl;
-            Wait(); // Wait for user input before continuing
-        }
+        
+    
 
     } while (enGameChoices(userChoice) != enGameChoices::Exit);
 }
@@ -520,12 +740,16 @@ int main()
     try
     {
         StartBank();
+        
     }
     catch (const std::exception &e)
     {
         // Catch the exception and handle it
-        std::cerr << "Caught exception: " << e.what() << std::endl;
+        system("cls"); 
+        std::cerr << "\nCaught exception: " << e.what() << std::endl;
+        cin.clear(); 
     }
+
 
     return 0;
 }

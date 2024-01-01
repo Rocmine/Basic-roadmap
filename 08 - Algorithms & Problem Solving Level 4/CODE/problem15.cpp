@@ -60,8 +60,8 @@ stDate readDate()
 
 int main()
 {
-    stDate date=readDate();
-    cout<<endl;
+    stDate date = readDate();
+    cout << endl;
     if (checkIfLastDaysInMonth(date))
     {
         cout << " Yes, Day is Last Day in Month\n";
@@ -70,7 +70,6 @@ int main()
     {
         cout << "Yes, Month is Last Month in Year\n";
     }
-
 
     return 0;
 }

@@ -1,4 +1,5 @@
-const jsonFileUrl = "/data.json";
+const jsonFileUrl = new URL('data.json', window.location.href).href;
+
 
 // Function to get URL parameters
 function getVolId() {
@@ -8,6 +9,7 @@ function getVolId() {
   for (const [key, value] of urlParams.entries()) {
     parameters[key] = value;
   }
+  
 
   return parameters;
 }
