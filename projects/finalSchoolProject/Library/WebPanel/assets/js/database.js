@@ -19,11 +19,11 @@ fetch(jsonFileUrl)
         <tr>
             <td>${index}</td>
             <td>${flight.avion.modele}</td>
-            <td><a href="/plane.html?id=${index}"><i class="fa-solid fa-circle-info"></i></a></td>
+            <td><a href="./plane.html?id=${index}"><i class="fa-solid fa-circle-info"></i></a></td>
             <td>${flight.dateDep.days + "/" + flight.dateDep.month + "/" + flight.dateDep.year}</td>
             <td>${flight.dateAr.days + "/" + flight.dateAr.month + "/" + flight.dateAr.year}</td>
             <td>
-              <a href="/passagers.html?id=${index}"><i class="fa-solid fa-list"></i> Liste</a>
+              <a href="./passagers.html?id=${index}"><i class="fa-solid fa-list"></i> Liste</a>
             </td>
             </tr>
           `;
@@ -44,5 +44,5 @@ fetch(jsonFileUrl)
   .catch((error) => {
     console.error("Error fetching the JSON file:", error);
     alert("501: Internal Error")
-    window.location.href = "/";
+    // window.location.href = "/";
   });

@@ -1732,6 +1732,9 @@ json cJson::vPassagerToJson(const vector<cPassager> &vPassager)
 
 json cJson::getVolsAsAJsonContent(const vector<cVol> &vVols)
 {
+  json flights;
+    
+
     json jsonArray;
 
     for (const auto &vol : vVols)
@@ -1747,8 +1750,11 @@ json cJson::getVolsAsAJsonContent(const vector<cVol> &vVols)
         // Add the JSON object to the array
         jsonArray.push_back(volObject);
     }
-
-    json flights;
+ 
+ if(vVols.size()==0){ 
+     jsonArray={}; 
+    } 
+   
     flights["flights"] = jsonArray;
 
     return flights;
@@ -1767,7 +1773,7 @@ void cJson::writeVolsToJsonFile(const vector<cVol> &vVols, const string &filenam
     // Youbista file :
     // string filePath = "../files/" + filename;
 
-    ofstream file(filePath, ios::in);
+    ofstream file(filePath, ios::trunc);
     if (file.is_open())
     {
         file << std::setw(4) << jsonArray << std::endl;

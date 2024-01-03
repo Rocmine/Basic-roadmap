@@ -29,10 +29,22 @@ project 2 :  bank 1  extension  3 :
 #include <string>
 #include <vector>
 #include <iomanip>
+
 #include <fstream>
 #include <stdexcept>
 using namespace std;
 const string separator = "#/";
+
+enum enUserPermissions{
+    preShowClient =1,
+    perAddClient,
+    perDeleteClient,
+    perUpdateClient,
+    perFindClient,
+    perTransaction,
+    perManageUsers, 
+    perLogout
+}; 
 
 struct stClient
 {
@@ -43,8 +55,19 @@ struct stClient
     string phone;
     float accountBalance;
 };
-const string fileName = "project1.txt";
 
+struct  stUser 
+{
+    string  username; 
+    string  password;
+    vector<bool> vPermissions;
+      stUser() : vPermissions(8){}   
+
+};
+
+const string clientsFile = "clients.txt";
+
+const string usersFile="users.txt"; 
 // --------------------------- print page Section  Function--------------------------------
 
 void printSectionTitle(string title)
@@ -92,7 +115,7 @@ stClient lineClientDateToRecord(string lineData, string separator = ::separator)
     return Record;
 }
 
-vector<stClient> loadClientsToVector(string fileName = ::fileName)
+vector<stClient> loadClientsToVector(string fileName = ::clientsFile)
 {
 
     fstream ClientsFile;
@@ -127,7 +150,7 @@ string RecordToLineClientDate(stClient client, string delim = ::separator)
 
     return str;
 }
-void UpdateFile(vector<stClient> vClients, string fileName = ::fileName)
+void UpdateFile(vector<stClient> vClients, string fileName = ::clientsFile)
 {
 
     fstream clientsFile;
@@ -210,7 +233,7 @@ enWannaAddMore checkIfUserWannaAddMoreRecord()
     return enWannaAddMore::no;
 }
 
-void AddClients(vector<stClient> &vClient, string fileName = ::fileName)
+void AddClients(vector<stClient> &vClient, string fileName = ::clientsFile)
 {
     enWannaAddMore wannaAddMore = enWannaAddMore::no;
     do
@@ -488,7 +511,6 @@ void DepositRecordFromVector(vector<stClient> &vClients, string ClientAn)
             UpdateFile(vClients);
             cout << "amount  deposed   Successfully \n\n";
     
-
  }
   else
     {
@@ -624,6 +646,404 @@ void transactionF(vector<stClient> &vClients){
     } while(enGameTransactionChoices(userChoice) != enGameTransactionChoices::mainMenu);
 
 }
+
+// -----------------------------------------Manage  users  Functions-----------------------------------------
+ 
+void  StrToPermissionsVector(vector<bool> &vPermissions, string str){
+ for(int i=enUserPermissions::preShowClient; i<str.length();i++){
+ vPermissions[i]=bool(str[i]); 
+ 
+ }
+}
+string vPermissionsToString(const vector<bool> &vPermissions){
+  string strVPerm=" "; 
+  for(int i=enUserPermissions::preShowClient ; i<vPermissions.size();i++){
+        strVPerm+=vPermissions[i];
+     
+  }
+  return strVPerm; 
+
+} 
+        
+ stUser lineUserDateToRecord(string lineData, string separator = ::separator)
+{
+
+    stUser Record;
+
+    vector<string> vRecord = getSplitStringWordToVector(lineData);
+
+    Record.username = vRecord[0];
+    Record.password = vRecord[1];
+  StrToPermissionsVector(Record.vPermissions,vRecord[2]); 
+     
+    return Record;
+}
+
+vector<stUser> loadUsersToVector(string fileName = ::usersFile)
+{
+
+    fstream usersFile;
+    vector<stUser> vUsers;
+    usersFile.open(fileName, ios::out | ios::in);
+
+    if (usersFile.is_open())
+    {
+
+        string dataLine = "";
+        while (getline(usersFile, dataLine))
+        {
+
+            stUser client = lineUserDateToRecord(dataLine);
+            vUsers.push_back(client);
+        }
+        usersFile.clear();
+        return vUsers;
+    }
+    else
+    {
+        cerr << "Opening File Error :  ";
+        exit(1);
+    }
+}
+
+// ------------------------------------update Users file functions -----------------------------------------------
+string RecordToLineUserData(const stUser &user, string delim = ::separator)
+{
+
+    string str = user.username + delim + user.password + delim +
+    vPermissionsToString(user.vPermissions);
+
+    return str;
+}
+void UpdateUsersFile(const vector<stUser> &vUsers, string fileName = ::usersFile)
+{
+
+    fstream usersFile;
+
+    usersFile.open(fileName, ios::out);
+
+    for (int i = 0; i < vUsers.size(); i++)
+    {
+        usersFile << RecordToLineUserData(vUsers[i]) << endl;
+    }
+
+    usersFile.close();
+}
+
+enum enGameManageUsersChoices{
+  eShowUsers=1,
+  eAddNewUser, 
+  eDeleteUser, 
+  eUpdateUser,
+  eFindUser, 
+  eMainMenu
+}; 
+
+
+void printManageUsersMenu()
+{
+
+    system("cls");
+    cout << setw(70) << "\n======================================================================\n";
+
+    cout << "                          Manage Users Menu Screen                          \n";
+    cout << setw(70) << "======================================================================\n";
+
+    cout << "                "
+         << "[1] List Users.\n";
+    cout << "                "
+         << "[2] Add new User.\n";
+    cout << "                "
+         << "[3] delete User.\n";
+    cout << "                "
+         << "[4] update User.\n";
+    cout << "                "
+         << "[5] Find User.\n";
+    cout << "                "
+         << "[6] Main Menu.\n";
+   
+    cout << setw(70) << "======================================================================\n";
+}
+
+void printUsersBasicTableOnScreen(vector<stUser> vUsers)
+{
+
+    cout << setw(75) << "\n\n                                          Client List (" << vUsers.size() << ") Client(s).\n";
+    cout << setw(75) << "_______________________________________________________________________________________________________________________\n\n";
+    cout << "  | " << left << setw(10) << "Username "
+         << "   "
+         << "  | " << left << setw(14) << "Password"
+         << "   "
+         << "  | " << left << setw(20) << "Permission"
+         << "   "    
+         << "\n";
+    cout << setw(75) << "_______________________________________________________________________________________________________________________\n\n";
+}
+string getStrPermissionToPrint(vector<bool> vPermissions){
+  string strPerm[]{"N","Y"}; 
+ string strVPerm=""; 
+  for(int i=enUserPermissions::preShowClient ; i<vPermissions.size();i++){
+
+        strVPerm+= "["+ to_string(i) +"]:" + strPerm[vPermissions[i]] +"  ";
+     
+  }
+  return strVPerm; 
+} 
+void printUser(stUser user)
+{
+
+    cout << "  | " << left << setw(10) << user.username << "  "
+                                                                  "   | "
+         << left << setw(14) << user.password << "   "
+         << left << "  | "<< getStrPermissionToPrint(user.vPermissions)
+         << "   "
+         << "\n";
+}
+
+void printUsers(vector<stUser> vUsers)
+{
+
+    system("cls");
+    printUsersBasicTableOnScreen(vUsers);
+    for (stUser &user : vUsers)
+    {
+        printUser(user);
+    }
+
+    cout << setw(75) << "\n_______________________________________________________________________________________________________________________\n\n";
+}
+
+enum enIsUserFound
+{
+    userNotFound,
+    UserFound
+};
+enIsUserFound checkIfUserAlreadyExist(vector<stUser> &vUsers, string username ,stUser &MyUser= *(new stUser))
+{
+
+    for (stUser &u : vUsers)
+    {
+        if (u.username == username)
+        {
+         MyUser=u;    
+            return enIsUserFound::UserFound;
+        }
+    }
+
+    return enIsUserFound::userNotFound;
+}
+
+void  readUserPermissions(vector<bool> &vPerm){
+
+string strPermissions[8]={
+     "", 
+    "[1] Show Client List",
+    "[2] Add new Client",
+    "[3] Delete Client",
+    "[4] Update Client Info",
+    "[5] Find Client",
+    "[6] Transactions",
+    "[7] Manage Users",
+    };
+
+  for(int i=enUserPermissions::preShowClient; i<vPerm.size(); i++){ 
+   char perm; 
+    cout<<"\n"; 
+ bool validValue; 
+  do{
+     perm=input::readCharacter(strPermissions[i] +  " [y/n]? "); 
+
+  }while(tolower(perm) !='y' && tolower(perm) != 'n');
+   
+    
+   vPerm[i]= towlower(perm)=='y'; 
+ 
+  }
+
+   
+
+
+}
+stUser ReadUser(vector<stUser> vUsers)
+{
+
+    stUser user;
+    enIsUserFound AlreadyExist = enIsUserFound::userNotFound;
+    cout << "Adding New User : \n\n";
+
+    do
+    {
+        if (AlreadyExist)
+            cout << "\nUser with [" << user.username << "]"
+                 << " already exits\n";
+
+        user.username= input::readString("Enter the username ? ");
+        AlreadyExist = checkIfUserAlreadyExist(vUsers, user.username);
+
+    } while (AlreadyExist == enIsUserFound::UserFound);
+
+    user.password = input::readString("Enter  the password ? ");
+    cout<<"\n New User Permissions : \n"; 
+     readUserPermissions(user.vPermissions); 
+    
+   
+    
+
+    return user;
+}
+
+void addUser(vector<stUser> &vUsers)
+{
+
+    stUser user = ReadUser(vUsers);
+    vUsers.push_back(user);
+}
+
+enWannaAddMore checkIfUserWannaAddMoreUsers()
+{
+    char wannaAddMore;
+    cout << "\nUser added Successfully, do you want to add more users? ";
+do{
+    wannaAddMore = input::readCharacter("[y][n] : ");
+  }while(toupper(wannaAddMore) !='Y' && toupper(wannaAddMore) != 'N'); 
+     
+    
+ 
+
+    if (wannaAddMore == 'y' || wannaAddMore == 'Y')
+        return enWannaAddMore::yes;
+
+    return enWannaAddMore::no;
+}
+
+void AddUsers(vector<stUser> &vUsers, string fileName = ::usersFile)
+{
+    enWannaAddMore wannaAddMore = enWannaAddMore::no;
+    do
+    {
+        system("cls");
+        printSectionTitle("Add New Users Screen ");
+        addUser(vUsers);
+        wannaAddMore = checkIfUserWannaAddMoreUsers();
+
+    } while (wannaAddMore == enWannaAddMore::yes);
+
+    UpdateUsersFile(vUsers);
+}
+
+void deleteUserFromVector(vector<stUser> &vUsers, string username)
+{
+
+    for (int i = 0; i < vUsers.size(); i++)
+    {
+        if (vUsers[i].username == username)
+        {
+
+            vUsers.erase(vUsers.begin() + i);
+            return;
+        }
+    }
+}
+void deleteUser(vector<stUser> &vUsers)
+{
+    system("cls");
+    printSectionTitle("delete User Screen ");
+    stUser user;
+
+    string  username= input::readString("Enter the Username? ");
+    if (checkIfUserAlreadyExist(vUsers,username,user) == enIsUserFound::UserFound)
+    {
+
+        printUser(user);
+                char sureToDelete; 
+        do{
+
+      sureToDelete = input::readCharacter("\nAre you sure you want delete this element? y/n ?");
+       
+         }while(toupper(sureToDelete) !='Y' && toupper(sureToDelete) != 'N'); 
+        if (toupper(sureToDelete) == 'Y')
+        {
+            deleteUserFromVector(vUsers,username);
+            UpdateUsersFile(vUsers);
+            cout << "User deleted with Successfully \n";
+        }
+        else
+        {
+            cout << "Operation Canceled with success\n";
+        }
+    }
+    else
+    {
+        cout << "\nUser with Account Number(" << username << ") "
+             << "not found!\n\n";
+    }
+}
+
+
+
+    
+// -----------------------------------------Manage  users  Functions-----------------------------------------
+ enWannaReturnToMenu ManageUserUsersChoices(enGameManageUsersChoices GameChoice, vector<stUser> &vUsers)
+{
+     enWannaReturnToMenu wannaReturnToMenu=enWannaReturnToMenu::noBackMenu; 
+    switch (GameChoice)
+    {
+    case enGameManageUsersChoices::eShowUsers:
+            printUsers(vUsers); 
+        break;
+    case enGameManageUsersChoices::eAddNewUser:
+         AddUsers(vUsers); 
+            
+        break;
+    case enGameManageUsersChoices::eDeleteUser :
+     deleteUser(vUsers); 
+            
+        break;
+    case enGameManageUsersChoices::eUpdateUser :
+            
+        break;
+    case enGameManageUsersChoices::eFindUser:
+            
+        break;
+
+    case enGameManageUsersChoices::eMainMenu:
+             wannaReturnToMenu=enWannaReturnToMenu::wannaBackMenu;
+        break;
+      
+  
+    }
+    if( wannaReturnToMenu==enWannaReturnToMenu::noBackMenu)
+       Wait("go back to Manage Uses  menu :");
+    return wannaReturnToMenu;
+}
+
+ 
+    void ManageUsers(vector<stUser> &vUsers){
+    
+     system("cls");
+    printSectionTitle("manage Users Menu Screen");
+    printManageUsersMenu();
+
+
+      int userChoice = 0;
+    do
+    {
+        
+           printManageUsersMenu();
+            userChoice = input::readIntegerInRange(enGameManageUsersChoices::eShowUsers, enGameManageUsersChoices::eMainMenu, "Choose what do you want to do [1 to 6]? ");
+
+            if(ManageUserUsersChoices(enGameManageUsersChoices(userChoice), vUsers) == enWannaReturnToMenu::wannaBackMenu)
+            userChoice=enGameManageUsersChoices::eMainMenu;
+        
+    
+         
+    } while(enGameManageUsersChoices(userChoice) != enGameManageUsersChoices::eMainMenu);
+
+    }
+      
+
+
+
 // --------------------------------------------------exit Functions------------------------------------------
 
 void exitProgram()
@@ -658,9 +1078,11 @@ void printMenu()
          << "[5] Find Client.\n";
     cout << "                "
          << "[6] Transactions.\n";
+    cout << "                "
+         << "[7] Manage Users.\n";
 
     cout << "                "
-         << "[7] Exit.\n";
+         << "[8] Logout .\n";
     cout << setw(70) << "======================================================================\n";
 }
 void Wait( string msg)
@@ -677,11 +1099,12 @@ enum enGameChoices
     DeleteClient,
     UpdateClient,
     FindClient,
-    transaction,
-    Exit
+     transaction,
+    eManageUsers, 
+    eLogout
 };
 
-void ManageUserChoices(enGameChoices GameChoice, vector<stClient> &vClients)
+void ManageUserChoices(enGameChoices GameChoice, vector<stClient> &vClients,vector<stUser> &vUsers)
 {
 
     switch (GameChoice)
@@ -704,13 +1127,18 @@ void ManageUserChoices(enGameChoices GameChoice, vector<stClient> &vClients)
     case enGameChoices::FindClient:
         findClient(vClients); // [5]
         break;
-
+    case enGameChoices::eManageUsers:// [6]
+    ManageUsers(vUsers);
+    break;
     case enGameChoices::transaction:
-        transactionF(vClients); // [6]
+        transactionF(vClients); // [7]
         break;
 
-    case enGameChoices::Exit:
-        exitProgram(); // [7]
+    
+     
+
+    case enGameChoices::eLogout:
+        exitProgram(); // [8]
         break;
     }
 
@@ -720,19 +1148,20 @@ void ManageUserChoices(enGameChoices GameChoice, vector<stClient> &vClients)
 void StartBank()
 {
     vector<stClient> vClients = loadClientsToVector();
+    vector<stUser> vUsers = loadUsersToVector();
 
     int userChoice = 0;
     do
     {
         
             printMenu();
-            userChoice = input::readIntegerInRange(enGameChoices::ShowClient, enGameChoices::Exit, "Choose what do you want to do [1 to 7]? ");
+            userChoice = input::readIntegerInRange(enGameChoices::ShowClient, enGameChoices::eLogout, "Choose what do you want to do [1 to 7]? ");
 
-            ManageUserChoices(enGameChoices(userChoice), vClients);
+            ManageUserChoices(enGameChoices(userChoice), vClients,vUsers);
         
     
 
-    } while (enGameChoices(userChoice) != enGameChoices::Exit);
+    } while (enGameChoices(userChoice) != enGameChoices::eLogout);
 }
 
 int main()
