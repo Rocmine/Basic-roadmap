@@ -9,7 +9,7 @@ write a program to read a string then uppercase the first letter of each word in
 #include <string>
 using namespace std;
 
-void lowercaseTheFirstLetterOfString(string &str)
+void upperCaseTheFirstLetterOfString(string &str)
 {
 
     for (int i = 0; i < str.length(); i++)
@@ -18,12 +18,14 @@ void lowercaseTheFirstLetterOfString(string &str)
     }
 }
 
+
+
 int main()
 {
 
     string str = input::readString("enter your string :");
     cout << "string after conversion : \n";
-    lowercaseTheFirstLetterOfString(str);
+    upperCaseTheFirstLetterOfString(str);
     cout << str;
     return 0;
 }
