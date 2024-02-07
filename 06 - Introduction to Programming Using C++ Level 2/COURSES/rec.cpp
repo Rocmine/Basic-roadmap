@@ -180,7 +180,6 @@ Static variables in C++ are variables that are associated with a class or a
 function rather than with a specific instance of the class or a local scope 
 of the function
 
-
 Static member variables are often used to keep track of shared data among instances of a class.
 Static local variables are used when you need to maintain state across function calls.
 */
@@ -317,8 +316,6 @@ int value = vName.at(index);
 // resize vector : 
 vName.resize(20, 0); 
 
-
-
 // add an element  to a vector : 
 vectorName.push_back(Value); 
 
@@ -435,11 +432,10 @@ by value  :
 create new variable then copy the value of basic var in the main 
 
 by ref : 
-create a new alias for th basic var in the main (when change value of new alis the basic change also)
+create a new alias for th basic var in the main (when change value of new alias the basic change also)
 */
 
-//example : 
-
+//*example : 
 void  byVal(int x){
 
     x++;
@@ -459,6 +455,10 @@ cout<<"the value of k is :"<<k<<endl<<"the value of a is :"<<a;
 }
 
 // what is pointer : 
+/*
+Pointers in C++ are variables that store memory addresses,
+ allowing direct manipulation of memory and providing flexibility in memory management. Here's a comprehensive overview of pointers:
+*/
 int main(){
 
 int k=12; 
