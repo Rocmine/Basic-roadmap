@@ -1,4 +1,3 @@
-    //  void print(){
-    //  cout<<"HI, i'm a student  \n" ; 
+cPerson *ptr=new cEmployee("ayoub","majid"); 
 
-    // }
+ptr->print()
