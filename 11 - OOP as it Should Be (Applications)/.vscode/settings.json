@@ -1,0 +1,10 @@
+{
+    "files.associations": {
+        "*.sql": "oraclesql",
+        "xstring": "cpp",
+        "iostream": "cpp",
+        "iosfwd": "cpp",
+        "vector": "cpp",
+        "ostream": "cpp"
+    }
+}

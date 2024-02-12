@@ -1,7 +1,7 @@
 #pragma once
 
 #include <iostream>
-#include<iomanip>
+#include <iomanip>
 #include "./input.h"
 using namespace std;
 
@@ -13,36 +13,35 @@ private:
     int year;
 
     // convert from  cDate to string function  :
-    string getDateToString() const ;
+    string getDateToString() const;
 
     enum enIsLeapYear
-{
-    noLeap,
-    isLeap
-};
+    {
+        noLeap,
+        isLeap
+    };
 
-enIsLeapYear checkIfYearIsLeap(int year)
-{
+    enIsLeapYear checkIfYearIsLeap(int year)
+    {
 
-    return year % 400 == 0 || (year % 4 == 0 && year % 100 != 0) ? enIsLeapYear::isLeap : enIsLeapYear::noLeap;
-}
+        return year % 400 == 0 || (year % 4 == 0 && year % 100 != 0) ? enIsLeapYear::isLeap : enIsLeapYear::noLeap;
+    }
 
-int getMonthDaysInYear()
-{
-    int numberOfDays[12] = {31, month == 2 && checkIfYearIsLeap(year) == enIsLeapYear::isLeap ? 29 : 28, 31, 30, 31, 30, 31, 31, 30, 31, 30, 31};
-    return numberOfDays[month - 1];
-}
+    int getMonthDaysInYear()
+    {
+        int numberOfDays[12] = {31, month == 2 && checkIfYearIsLeap(year) == enIsLeapYear::isLeap ? 29 : 28, 31, 30, 31, 30, 31, 31, 30, 31, 30, 31};
+        return numberOfDays[month - 1];
+    }
 
-short calculateDayOfWeek(short dayOrder)
-{
-    short a = (14 - month) / 12;
-    short m = month + 12 * a - 2;
+    short calculateDayOfWeek(short dayOrder)
+    {
+        short a = (14 - month) / 12;
+        short m = month + 12 * a - 2;
 
-    short d = (dayOrder + year + year / 4 - year / 100 + year / 400 + ((31 * m) / 12)) % 7;
+        short d = (dayOrder + year + year / 4 - year / 100 + year / 400 + ((31 * m) / 12)) % 7;
 
-    return d;
-}
-
+        return d;
+    }
 
 public:
     // constructor par default :
@@ -72,10 +71,10 @@ public:
     static string getCurrentTimeInfo();
 
     // set days :
-    void setDays( const int &days);
+    void setDays(const int &days);
 
     // get days :
-    int getDays() const ;
+    int getDays() const;
 
     void readDateFab()
     {
@@ -95,82 +94,83 @@ public:
         } while (isValidDate);
     }
     void printMonthCalender()
-{
-    string arrDays[] = {"Sunday", "Monday", "tuesday", "Wednesday", "Thursday", "Friday", "saturday"};
-    string arrMonths[] = {"", "January", "February", "March", "April", "May", "June", "July", "August", "September", "October", "November", "December"};
-
-    int daysInMonth = getMonthDaysInYear();
-    int dayOrder = calculateDayOfWeek(1);
-
-    cout << "\n\n_________________________________________" << arrMonths[month] << "_________________________________________\n\n";
-
-    for (int i = 0; i <= 6; i++)
-        cout << setw(12) << arrDays[i];
-    cout << "\n";
-
-   int i=1; 
-    for(;i<=dayOrder;i++){
-        cout <<right<<setw(12)<<"";
-    }
-     int dayCounter = 1;
-    while (dayCounter <= daysInMonth)
     {
-       
-      cout <<right<<setw(12)<<dayCounter++; 
-        if (i++ % 7==0)  cout << "\n";
-    }
-    cout << "\n_______________________________________________________________________________________\n\n";
-}
- void printMonthCalender(int month)
-{
-    string arrDays[] = {"Sunday", "Monday", "tuesday", "Wednesday", "Thursday", "Friday", "saturday"};
-    string arrMonths[] = {"", "January", "February", "March", "April", "May", "June", "July", "August", "September", "October", "November", "December"};
+        string arrDays[] = {"Sunday", "Monday", "tuesday", "Wednesday", "Thursday", "Friday", "saturday"};
+        string arrMonths[] = {"", "January", "February", "March", "April", "May", "June", "July", "August", "September", "October", "November", "December"};
 
-    int daysInMonth = getMonthDaysInYear();
-    int dayOrder = calculateDayOfWeek(1);
+        int daysInMonth = getMonthDaysInYear();
+        int dayOrder = calculateDayOfWeek(1);
 
-    cout << "\n_________________________________________" << arrMonths[month] << "_________________________________________\n\n";
+        cout << "\n\n_________________________________________" << arrMonths[month] << "_________________________________________\n\n";
 
-    for (int i = 0; i <= 6; i++)
-        cout << setw(12) << arrDays[i];
-    cout << "\n";
-
-   int i=1; 
-    for(;i<=dayOrder;i++){
-        cout <<right<<setw(12)<<"";
-    }
-     int dayCounter = 1;
-    while (dayCounter <= daysInMonth)
-    {
-       
-      cout <<right<<setw(12)<<dayCounter++; 
-        if (i++ % 7==0)  cout << "\n";
-    }
-    cout << "\n_______________________________________________________________________________________\n";
-}
-
-void printCalender()
-{
-    cout << "\n_________________________________________________________________________________________\n";
-    cout << "_____________________________________Calendar - " << year << "_____________________________________";
-    cout << "\n\n_________________________________________________________________________________________";
-
-    for (int month = 1; month <= 12; month++)
-    {
-
+        for (int i = 0; i <= 6; i++)
+            cout << setw(12) << arrDays[i];
         cout << "\n";
-        printMonthCalender(month);
+
+        int i = 1;
+        for (; i <= dayOrder; i++)
+        {
+            cout << right << setw(12) << "";
+        }
+        int dayCounter = 1;
+        while (dayCounter <= daysInMonth)
+        {
+
+            cout << right << setw(12) << dayCounter++;
+            if (i++ % 7 == 0)
+                cout << "\n";
+        }
+        cout << "\n_______________________________________________________________________________________\n\n";
     }
-}
+    void printMonthCalender(int month)
+    {
+        string arrDays[] = {"Sunday", "Monday", "tuesday", "Wednesday", "Thursday", "Friday", "saturday"};
+        string arrMonths[] = {"", "January", "February", "March", "April", "May", "June", "July", "August", "September", "October", "November", "December"};
 
+        int daysInMonth = getMonthDaysInYear();
+        int dayOrder = calculateDayOfWeek(1);
 
+        cout << "\n_________________________________________" << arrMonths[month] << "_________________________________________\n\n";
 
+        for (int i = 0; i <= 6; i++)
+            cout << setw(12) << arrDays[i];
+        cout << "\n";
+
+        int i = 1;
+        for (; i <= dayOrder; i++)
+        {
+            cout << right << setw(12) << "";
+        }
+        int dayCounter = 1;
+        while (dayCounter <= daysInMonth)
+        {
+
+            cout << right << setw(12) << dayCounter++;
+            if (i++ % 7 == 0)
+                cout << "\n";
+        }
+        cout << "\n_______________________________________________________________________________________\n";
+    }
+
+    void printCalender()
+    {
+        cout << "\n_________________________________________________________________________________________\n";
+        cout << "_____________________________________Calendar - " << year << "_____________________________________";
+        cout << "\n\n_________________________________________________________________________________________";
+
+        for (int month = 1; month <= 12; month++)
+        {
+
+            cout << "\n";
+            printMonthCalender(month);
+        }
+    }
 };
 
 // /------------------- start cDate class -------------------------------------------
 
 // convert from  cDate to string function  :
-string cDate::getDateToString() const 
+string cDate::getDateToString() const
 {
     string stDay = to_string(days);
     string stMonth = to_string(month);
@@ -215,9 +215,9 @@ istream &operator>>(istream &inp, cDate &date)
     do
     {
 
-        date.days = input::readPositiveIntegerNumber("",false);
-        date.month = input::readPositiveIntegerNumber("",false);
-        date.year = input::readPositiveIntegerNumber("",false);
+        date.days = input::readPositiveIntegerNumber("", false);
+        date.month = input::readPositiveIntegerNumber("", false);
+        date.year = input::readPositiveIntegerNumber("", false);
         isValidDate = date.days > 31 || date.days < 1 || date.month > 12 || date.month < 1
 
                       || date < cDate::getCurrentDate();
@@ -232,7 +232,7 @@ istream &operator>>(istream &inp, cDate &date)
 // operator de affichage
 ostream &operator<<(ostream &out, const cDate &date)
 {
-    
+
     cout << date.getDateToString() << endl;
     return out;
 }
@@ -411,14 +411,14 @@ string cDate::getCurrentTimeInfo()
 }
 
 // set day  :
-void cDate::setDays( const int &days) 
+void cDate::setDays(const int &days)
 {
 
     this->days = days;
 }
 
 // get days :
-int cDate::getDays() const 
+int cDate::getDays() const
 {
     return this->days;
 }

@@ -1,6 +1,4 @@
 #pragma once
-#pragma GCC diagnostic push
-#pragma GCC diagnostic ignored "-Wunused-variable"
 #include <iostream>
 #include <vector>
 using namespace std;
@@ -596,7 +594,8 @@ public:
         return length(value);
     }
 
-     string getValue(){
-        return value; 
-     }
+    string getValue()
+    {
+        return value;
+    }
 };
