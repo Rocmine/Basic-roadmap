@@ -1,0 +1,6 @@
+{
+    "files.associations": {
+        "*.sql": "oraclesql",
+        "iomanip": "cpp"
+    }
+}

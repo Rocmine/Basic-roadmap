@@ -694,142 +694,50 @@ ostream &operator<<(ostream &out, cDate &date)
 bool operator==(const cDate &ob1, const cDate &ob2)
 {
 
-    if (ob1.year == ob2.year)
-    {
-        if (ob1.month == ob2.month)
-        {
-
-            if (ob1.days == ob2.days)
-            {
-                return 1;
-            }
-            else
-            {
-                return 0;
-            }
-        }
-        else
-        {
-            return 0;
-        }
-    }
-    else
-    {
-        return 0;
-    }
+    return ob1.year==ob2.year && ob1.month == ob2.month && ob1.days==ob2.days; 
 }
 
 bool operator<(const cDate &ob1, const cDate &ob2)
 {
-    if (ob1.year <= ob2.year)
+    if (ob1.year < ob2.year)
+        return true;
+    if (ob1.year == ob2.year)
     {
+        if (ob1.month < ob2.month) return true;
 
-        if (ob1.month <= ob2.month)
+        if (ob1.month == ob2.month)
         {
-
             if (ob1.days < ob2.days)
-            {
-                return 1;
-            }
-            else
-            {
-                return 0;
-            }
-        }
-        else
-        {
-            return 0;
+                return true;
         }
     }
-    else
-    {
-        return 0;
-    }
+    return false;
 }
+
 bool operator>(const cDate &ob1, const cDate &ob2)
 {
-
-    if (ob1.year >= ob2.year)
+    if (ob1.year > ob2.year)
+        return true;
+     if (ob1.year == ob2.year)
     {
-
-        if (ob1.month >= ob2.month)
+        if (ob1.month > ob2.month)  return true;
+      if (ob1.month == ob2.month)
         {
-
             if (ob1.days > ob2.days)
-            {
-                return 1;
-            }
-            else
-            {
-                return 0;
-            }
-        }
-        else
-        {
-            return 0;
+                return true;
         }
     }
-    else
-    {
-        return 0;
-    }
-}
-bool operator<=(const cDate &ob1, const cDate &ob2)
-{
-
-    if (ob1.year <= ob2.year)
-    {
-
-        if (ob1.month <= ob2.month)
-        {
-
-            if (ob1.days <= ob2.days)
-            {
-                return 1;
-            }
-            else
-            {
-                return 0;
-            }
-        }
-        else
-        {
-            return 0;
-        }
-    }
-    else
-    {
-        return 0;
-    }
+    return false;
 }
 
 bool operator>=(const cDate &ob1, const cDate &ob2)
 {
+    return !(ob1 < ob2);
+}
 
-    if (ob1.year >= ob2.year)
-    {
-
-        if (ob1.month >= ob2.month)
-        {
-
-            if (ob1.days >= ob2.days)
-            {
-                return 1;
-            }
-            else
-            {
-                return 0;
-            }
-        }
-        else
-        {
-            return 0;
-        }
-    }
-    else
-    {
-        return 0;
-    }
+bool operator<=(const cDate &ob1, const cDate &ob2)
+{
+    return !(ob1 > ob2);
 }
 
 // get the current date function :
