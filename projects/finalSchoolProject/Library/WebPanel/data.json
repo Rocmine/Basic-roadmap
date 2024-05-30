@@ -34,6 +34,41 @@
                 }
             ],
             "volId": 1
+        },
+        {
+            "avion": {
+                "capacite": 147,
+                "codeAv": 13,
+                "dateFab": {
+                    "days": 12,
+                    "month": 2,
+                    "year": 2010
+                },
+                "modele": "tttt",
+                "nbrVols": 1,
+                "pilote": "asmaa"
+            },
+            "dateAr": {
+                "days": 5,
+                "month": 11,
+                "year": 2024
+            },
+            "dateDep": {
+                "days": 4,
+                "month": 11,
+                "year": 2024
+            },
+            "vPassager": [
+                {
+                    "adresse": "5gfgf",
+                    "age": 20,
+                    "idPass": 12,
+                    "nom": "ayoub",
+                    "prenom": "majjid",
+                    "tele": "3343"
+                }
+            ],
+            "volId": 5
         }
     ]
 }

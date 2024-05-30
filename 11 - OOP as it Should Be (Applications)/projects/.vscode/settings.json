@@ -1,0 +1,12 @@
+{
+    "files.associations": {
+        "*.sql": "oraclesql",
+        "xstring": "cpp",
+        "iostream": "cpp",
+        "iomanip": "cpp",
+        "ios": "cpp",
+        "fstream": "cpp",
+        "vector": "cpp",
+        "string": "cpp"
+    }
+}

@@ -21,4 +21,6 @@ int main()
     cout << str2 << "*" << str3 << "=" << stoi(str2) * stoi(str3) << endl;
 
     return 0;
+
+    // 1
 }

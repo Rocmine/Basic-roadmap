@@ -815,7 +815,7 @@ enum enIsUserFound
 };
 enIsUserFound checkIfUserAlreadyExist(vector<stUser> &vUsers, string username, stUser &MyUser = *(new stUser))
 {
-
+      
     for (stUser &u : vUsers)
     {
         if (u.username == username)
@@ -825,7 +825,9 @@ enIsUserFound checkIfUserAlreadyExist(vector<stUser> &vUsers, string username, s
         }
     }
 
+  
     return enIsUserFound::userNotFound;
+
 }
 
 void readUserPermissions(vector<bool> &vPerm)
