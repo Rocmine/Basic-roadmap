@@ -2,39 +2,56 @@
 #include "./clsDblLinkedLIst.h"
 using namespace std;
 
-
-
 int main()
 {
 
-      clsDblLinkedList<int> myDbLinkedList;
+    clsDblLinkedList<int> myDbLinkedList;
 
-    // Insert some numbers
     myDbLinkedList.insertAtEnd(1);
     myDbLinkedList.insertAtEnd(2);
     myDbLinkedList.insertAtEnd(3);
 
-    // Display the list
-    std::cout << "List: " << myDbLinkedList.ToString() << std::endl;
+    cout << myDbLinkedList.ToString() << std::endl;
 
-    // Find a node with value 2
-    clsNode<int>* foundNode = myDbLinkedList.Find(2);
-    if (foundNode) {
+    clsNode<int> *foundNode = myDbLinkedList.Find(2);
+    if (foundNode)
+    {
         std::cout << "Found: " << foundNode->value << std::endl;
-    } else {
+    }
+    else
+    {
         std::cout << "Not found" << std::endl;
     }
 
-    // Delete node with value 2
     myDbLinkedList.DeleteNode(2);
-    std::cout << "After deletion: " << myDbLinkedList.ToString() << std::endl;
+    cout << "After deletion: " << myDbLinkedList.ToString() << "\n";
 
-    // Delete the first node
     myDbLinkedList.deleteFirstNode();
-    std::cout << "After deleting first node: " << myDbLinkedList.ToString() << std::endl;
+    cout << "After deleting first node: " << myDbLinkedList.ToString() << "\n";
 
-    // Delete the last node
+    cout << "The linked list size :  " << myDbLinkedList.Size() << endl;
+
     myDbLinkedList.DeleteLastNode();
-    std::cout << "After deleting last node: " << myDbLinkedList.ToString() << std::endl;
+
+    cout << "After deleting last node: " << myDbLinkedList.ToString() << "\n";
+
+    myDbLinkedList.insertAtEnd(1);
+    myDbLinkedList.insertAtEnd(2);
+    myDbLinkedList.insertAtEnd(3);
+    myDbLinkedList.reverse();
+    myDbLinkedList.insertAtEnd(3);
+
+    cout << myDbLinkedList.ToString() << "\n";
+    cout << "Update node by index :\n";
+    myDbLinkedList.UpdateItem(0, 100);
+    myDbLinkedList.InsertAfter(3, 250);
+    cout << myDbLinkedList.ToString() << "\n";
+
+    cout << "The node at index :" << myDbLinkedList.GetNode(3) << endl;
+    cout << "The item at index :" << myDbLinkedList.GetItem(10) << endl;
+
+    myDbLinkedList.Clear();
+    cout << "After clearing the linked  : " << myDbLinkedList.ToString() << std::endl;
+
     return 0;
 }
